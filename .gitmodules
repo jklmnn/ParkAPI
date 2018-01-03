@@ -1,0 +1,3 @@
+[submodule "park_api/cities"]
+	path = park_api/cities
+	url = https://github.com/offenesdresden/ParkAPI_Modules.git
