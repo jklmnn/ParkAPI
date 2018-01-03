@@ -75,6 +75,7 @@ Also please note that this is not valid JSON. Just an example for how the output
 
 		$ git clone git@github.com:offenesdresden/ParkAPI.git
 		$ cd ParkAPI
+                $ git submodule update --init --recursive
 
  - Create a new virtualenv:
 
