@@ -13,6 +13,8 @@ here = path.abspath(path.dirname(__file__))
 
 requirements = parse_requirements(path.join(here, "requirements.txt"), session=False)
 install_requires = [str(ir.req) for ir in requirements]
+module_requirements = parse_requirements(path.join(here, "park_api/cities/requirements.txt"), session=False)
+install_requires.extend([str(ir.req) for ir in module_requirements])
 
 # Get the long description from the relevant file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -49,7 +51,7 @@ setup(
 
     packages=find_packages(exclude=['cache', 'server.log']),
 
-    install_requires=install_requires,
+    install_requires=list(set(install_requires)),
 
     extras_require={
         'dev': ['pip'],
