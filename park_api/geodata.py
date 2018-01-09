@@ -3,8 +3,6 @@ import os
 import json
 from collections import namedtuple
 from park_api import env
-from park_api.util import remove_special_chars
-
 
 lot_fields = ['name', 'id', 'type', 'lng', 'lat', 'address', 'total', 'aux']
 
@@ -26,10 +24,33 @@ class City(namedtuple('City', city_fields)):
             return {'lng': self.lng, 'lat': self.lat}
         return None
 
-
 def generate_id(s):
-    return remove_special_chars(s.lower())
+    """
+    Remove any umlauts, spaces and punctuation from a the name.
 
+    :param string:
+    :return:
+    """
+    replacements = {
+        "ä": "ae",
+        "ö": "oe",
+        "ü": "ue",
+        "ß": "ss",
+        "-": "",
+        " ": "",
+        ".": "",
+        ",": "",
+        "'": "",
+        "\"": "",
+        "/": "",
+        "\\": "",
+        "\n": "",
+        "\t": ""
+    }
+    string = s.lower()
+    for repl in replacements.keys():
+        string = string.replace(repl, replacements[repl])
+    return string
 
 class GeoData:
     def __init__(self, city):

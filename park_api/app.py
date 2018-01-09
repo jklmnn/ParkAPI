@@ -3,7 +3,7 @@ from os import getloadavg
 
 from flask import Flask, jsonify, abort, request
 import psycopg2
-from park_api import scraper, util, env, db
+from park_api import scraper, env, db
 from park_api.forecast import find_forecast
 from park_api.crossdomain import crossdomain
 
@@ -51,7 +51,7 @@ def get_meta():
 def get_api_status():
     return jsonify({
         "status": "online",
-        "server_time": util.utc_now(),
+        "server_time": datetime.utcnow().replace(microsecond=0).isoformat(),
         "load": getloadavg()
     })
 
